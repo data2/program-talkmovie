@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration> 
+<properties>
+<property name="LOG_HOME">/root/logs</property>
+</properties>
+<Appenders> 
+<Console name="CONSOLE" target="SYSTEM_OUT">
+<!-- 输出格式 -->
+<PatternLayout pattern="ROOT:%d %-5p %C %L - %m%n" />
+</Console>
+<RollingRandomAccessFile name="logfile" fileName="${LOG_HOME}/web-prod.log" filePattern="${LOG_HOME}/web-prod.log.%d{yyyy-MM-dd}">  
+<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"></PatternLayout>
+<Policies> 
+<TimeBasedTriggeringPolicy interval="1" modulate="true"></TimeBasedTriggeringPolicy>
+</Policies>
+<DefaultRolloverStrategy max="20"/>
+</RollingRandomAccessFile>
+<RollingRandomAccessFile name="KafkaLogFile" fileName="${KAFKALOG_HOME}/KafkaLog.log" filePattern="${KAFKALOG_HOME}/KafkaLog.log.%d{yyyy-MM-dd}">  
+<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"></PatternLayout>
+<Policies> 
+<TimeBasedTriggeringPolicy interval="1" modulate="true"></TimeBasedTriggeringPolicy>
+</Policies>
+<DefaultRolloverStrategy max="20"/>
+</RollingRandomAccessFile>
+</Appenders>
+<Loggers> 
+<Root level="INFO"> 
+<AppenderRef ref="CONSOLE"/>
+<AppenderRef ref="logfile"/>
+</Root>
+<logger name="KafkaLog" additivity="false" level="INFO">
+<AppenderRef ref="KafkaLogFile"/>
+</logger>
+</Loggers>
+</Configuration>

@@ -1,0 +1,12 @@
+server:
+  port: 8882
+  context-path : /talkmovie
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:7762/talkmovie?characterEncoding=UTF-8
+    username: root
+    password: $ZEROone123
+    driver-class-name: com.mysql.jdbc.Driver
